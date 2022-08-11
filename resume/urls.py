@@ -5,4 +5,5 @@ app_name = 'resume'
 
 urlpatterns = [
     path('', home, name='home'),
+    path('resume', pdf_view, name='resume'),
 ]

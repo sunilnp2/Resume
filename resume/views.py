@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from resume.models import Contact
 from django.contrib import messages
+from django.http import FileResponse
+import os
 
 # Create your views here.
 
@@ -27,3 +29,23 @@ def home(request):
             messages.success(request, "Message Sent Successfully!")
             return redirect('resume:home')
     return render(request, 'index.html')
+
+
+
+
+# def viewpdf(request):
+#     # pdf = render_t
+#     return HttpResponse('resume.pdf', content_type = 'application/pdf')
+
+
+ 
+# def showpdf(request):
+#     filepath = os.path.join('static', 'resume.pdf')
+#     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+from django.http import  HttpResponse
+def pdf_view(request):
+    with open('resume.pdf', 'rb') as pdf:
+        response = HttpResponse(pdf.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'inline;filename=mypdf.pdf'
+        return response
